@@ -1,0 +1,30 @@
+{
+  "name": "gvmi-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "archiver": "^5.3.1",
+    "big-integer": "^1.6.51",
+    "body-parser": "^1.20.0",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "express": "^4.18.1",
+    "js-base64": "^3.7.2",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
+    "morgan": "^1.10.0",
+    "mount-routes": "^1.0.8",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "utf8": "^3.0.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
