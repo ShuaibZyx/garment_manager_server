@@ -24,7 +24,7 @@ const hireDao = {
     const hire_id = guid();
     const sqls = [
       "insert into hire(hire_id, day, renter_id, owner_id, garment_id, total_price) values(?, ?, ?, ?, ?, ?)",
-      "update garment set state = 2",
+      "update garment set state = 2 where garment_id = ?",
     ];
 
     const params = [
@@ -36,7 +36,7 @@ const hireDao = {
         hireObj.garment_id,
         hireObj.total_price,
       ],
-      [],
+      [hireObj.garment_id],
     ];
     return new Promise((resolve, reject) => {
       connection
@@ -74,7 +74,7 @@ const hireDao = {
       connection
         .query(sql, hire_id)
         .then((data) => {
-          if (data.length === 1) resolve(JSON.parse(JSON.stringify(data)));
+          if (data.length >= 0) resolve(JSON.parse(JSON.stringify(data)));
           else reject("数据库操作出现错误!");
         })
         .catch((error) => {

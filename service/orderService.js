@@ -17,18 +17,24 @@ const orderService = {
         key
       );
       for (let i = 0; i < ordersRes.length; i++) {
-        ordersRes[i].hireInfo = (
-          await hireDao.selectHireById(ordersRes[i].hire_id)
-        )[0];
-        ordersRes[i].garment = (
-          await garmentDao.selectGarmentById(ordersRes[i].hireInfo.garment_id)
-        )[0];
-        ordersRes[i].renter = (
-          await userDao.selectUserById(ordersRes[i].hireInfo.renter_id)
-        )[0];
-        ordersRes[i].owner = (
-          await userDao.selectUserById(ordersRes[i].hireInfo.owner_id)
-        )[0];
+        if (ordersRes[i].hire_id) {
+          ordersRes[i].hireInfo = (
+            await hireDao.selectHireById(ordersRes[i].hire_id)
+          )[0];
+          if (ordersRes[i].hireInfo !== undefined) {
+            ordersRes[i].garment = (
+              await garmentDao.selectGarmentById(
+                ordersRes[i].hireInfo.garment_id
+              )
+            )[0];
+            ordersRes[i].renter = (
+              await userDao.selectUserById(ordersRes[i].hireInfo?.renter_id)
+            )[0];
+            ordersRes[i].owner = (
+              await userDao.selectUserById(ordersRes[i].hireInfo?.renter_id)
+            )[0];
+          }
+        }
       }
       res.json(result.selectSuccess(ordersRes));
     } catch (error) {

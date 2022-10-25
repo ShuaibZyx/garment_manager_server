@@ -60,7 +60,9 @@ const userDao = {
   //根据用户账号模糊查询用户id,账号与昵称
   selectUserByAccount(account) {
     const sql =
-      "select user_id, account from user_account where account like ?";
+      account !== undefined
+        ? "select a.user_id, a.account, i.nickname from user_account a, user_info i where a.user_id = i.user_id and a.account like ?"
+        : "select a.user_id, a.account, i.nickname from user_account a, user_info i where a.user_id = i.user_id";
     return new Promise((resolve, reject) => {
       connection
         .query(sql, "%" + account + "%")
@@ -86,6 +88,7 @@ const userDao = {
           else reject();
         })
         .catch((error) => {
+          console.log(error);
           reject(error.message);
         });
     });

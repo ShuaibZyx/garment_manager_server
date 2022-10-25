@@ -9,7 +9,7 @@ const fileService = {
   async uploadFile(req, res) {
     const fileUrl =
       `http://${config.db.host}:${config.port}/` +
-      req.file.path.replaceAll("\\", "/");
+      req.file.path;
     const filename = utf8.decode(req.file.originalname);
     const size = req.file.size;
     try {
